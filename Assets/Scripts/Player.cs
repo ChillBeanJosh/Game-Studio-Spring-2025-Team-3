@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
         //Removes Default Cursor Visability.
         Cursor.lockState = CursorLockMode.Locked;
 
-        //Enabling the Unity Input System.
+        //Enabling the Unity Input System. 
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
@@ -36,12 +36,29 @@ public class Player : MonoBehaviour
         //Gets the refrence to the specified Input System Map.
         var input = _inputActions.Gameplay;
 
-        //Gets refence to the structure (cameraInput) within PlayerCamera.cs
+
+
+        //Gets refence to the structure (CameraInput) within PlayerCamera.cs
         //Declaring the Look variable in the structure to be the value for the "Look" Action within the Input System Map.
-        //Currently controlled by the Mouse and will be used to UpdateRotation.
-        var cameraInput = new CameraInput { Look = input.Look.ReadValue<Vector2>() };
+        var cameraInput = new CameraInput
+        {
+            Look = input.Look.ReadValue<Vector2>()
+        };
 
         playerCamera.UpdateRotation(cameraInput);
         playerCamera.UpdatePosition(playerCharacter.GetCameraTarget());
+
+
+        //Gets refence to the structure (CharacterInput) within PlayerCharacter.cs
+        //Declaring the Move variable in the structure to be the value for the "Move" Action within the Input System Map.
+        var characterInput = new CharacterInput
+        {
+            Rotation = playerCamera.transform.rotation,
+            Move = input.Move.ReadValue<Vector2>(),
+            Jump = input.Jump.WasPerformedThisFrame()
+        };
+
+        playerCharacter.UpdateInput(characterInput);
+        
     }
 }
