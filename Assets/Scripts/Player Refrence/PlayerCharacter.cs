@@ -39,6 +39,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Space]
     [SerializeField] private float standHeight = 2f;
     [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float crouchHeightResponse = 15f;
     [Range (0f, 1f)]
     [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0f, 1f)]
@@ -86,33 +87,46 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             CrouchInput.Toggle => !_requestedCrouch,
             CrouchInput.None => _requestedCrouch,
             _ => _requestedCrouch
-
-            //IN THE CASE OF IMPLEMENTING HOLD.
-            //CrouchInput.Crouch => true,
-            //CrouchInput.UnCrouch => false
-            //
         };
    
     }
 
-    //Function used to adjust the Character Body (Root/Mesh).
-    public void UpdateBody()
+    //Function used to adjust the Character Root/Mesh.
+    public void UpdateBody(float deltaTime)
     {
         var currentHeight = motor.Capsule.height;
         var normalizedHeight = currentHeight / standHeight;
 
-        //Depending of the Stance (state) -> changes the specified camera height.
         var cameraTargetHeight = currentHeight *
         (
+            //IF Stance = stand -> 'standCameraHeight', ELSE -> 'crouchCameraHeight'
             _stance is Stance.Stand
                 ? standCameraTargetHeight
                 : crouchCameraTargetHeight
         );
 
+        //Adjusts the cameraTarget position according to the updated value.
+        cameraTarget.localPosition = Vector3.Lerp
+        (
+            a: cameraTarget.localPosition,
+            b: new Vector3(0f, cameraTargetHeight, 0f),
+            t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
+        );
+
+
+
+        //Using the normalized height -> adjusts the Root/Mesh to fit.
         var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
 
-        cameraTarget.localPosition = new Vector3(0f, cameraTargetHeight, 0f);
-        root.localScale = rootTargetScale;
+        //Scales the Root/Mesh to the specified target scale from above.
+        root.localScale = Vector3.Lerp
+        (
+            a: root.localScale,
+            b: rootTargetScale,
+            t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
+        );
+
+        
     }
 
     //NOTE: UpdateVelocity() is called is physics tick, BY THE "KinematicCharacterMotor".
@@ -124,7 +138,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             //NOTE: By default will give a unit vector -> multiply (_requestedMovement) to keep speed.
             var groundedMovement = motor.GetDirectionTangentToSurface
             (
-
                 direction: _requestedMovement,
                 surfaceNormal: motor.GroundingStatus.GroundNormal
             ) * _requestedMovement.magnitude;
@@ -179,7 +192,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //NOTE: BeforeCharacterUpdate() is called before the "KinematicCharacterController" Updates.
     public void BeforeCharacterUpdate(float deltaTime)
     {
-        //Enabling Player Crouch.
+        //Enabling Player Crouch (EFFECTS THE MOTOR).
         if (_requestedCrouch && _stance is Stance.Stand)
         {
             _stance = Stance.Crouch;
@@ -199,7 +212,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //NOTE: AfterCharacterUpdate() is called after the "KinematicCharacterController" Updates.
     public void AfterCharacterUpdate(float deltaTime)
     {
-        //Disabling Player Crouch
+        //Disabling Player Crouch (EFFECTS THE MOTOR).
         if (!_requestedCrouch && _stance is not Stance.Stand)
         {
             motor.SetCapsuleDimensions

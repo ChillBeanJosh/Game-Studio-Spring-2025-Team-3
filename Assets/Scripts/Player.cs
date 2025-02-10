@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
         //Gets the refrence to the specified Input System Map.
         var input = _inputActions.Gameplay;
 
+        var deltaTime = Time.deltaTime;
 
 
         //Gets refence to the structure (CameraInput) within PlayerCamera.cs
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         };
 
         playerCharacter.UpdateInput(characterInput);
-        playerCharacter.UpdateBody();
+        playerCharacter.UpdateBody(deltaTime);
         
     }
 }
