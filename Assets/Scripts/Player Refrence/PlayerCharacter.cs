@@ -69,7 +69,9 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Range(0f, 1f)]
     [SerializeField] private float crouchCameraTargetHeight = 0.7f;
     [Space]
-    [SerializeField] private bool positiveCharge = false;
+    [SerializeField] public bool positiveCharge = false;
+    [SerializeField] private float chargeEffectStrength = 10f;
+    [SerializeField] private float chargeEffectRadius = 5f;
 
     private CharacterState _state;
     private CharacterState _lastState;
@@ -189,6 +191,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //NOTE: UpdateVelocity() is called is physics tick, BY THE "KinematicCharacterMotor".
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        ApplyChargeEffect(ref currentVelocity, deltaTime);
+
         //If the Character is grounded.
         if (motor.GroundingStatus.IsStableOnGround)
         {
@@ -541,5 +545,27 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     public void ChargeToggle()
     {
         positiveCharge = !positiveCharge;
+    }
+
+
+    //Collison Checks for when player is in radius of object.
+    //Done this way as player is kinematic:
+    public void ApplyChargeEffect(ref Vector3 currentVelocity, float deltaTime)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, chargeEffectRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Positive") || hitCollider.CompareTag("Negative"))
+            {
+                bool isPositive = hitCollider.CompareTag("Positive");
+
+                bool shouldAttract = (positiveCharge && isPositive) || (!positiveCharge && !isPositive);
+
+                Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
+
+                float force = shouldAttract ? chargeEffectStrength : -chargeEffectStrength * 5;
+                currentVelocity += direction * force * deltaTime;
+            }
+        }
     }
 }

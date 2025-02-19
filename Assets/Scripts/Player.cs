@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.pKey.wasPressedThisFrame)
+        if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             playerCharacter.ChargeToggle();
         }
