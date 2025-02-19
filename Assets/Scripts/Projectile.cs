@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     {
         UpdateMaterial();
 
-        if (Input.GetKeyDown(KeyCode.Q) && Time.time >= lastFireTime + cooldownTime)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time >= lastFireTime + cooldownTime)
         {
             SpawnProjectile();
             lastFireTime = Time.time;
