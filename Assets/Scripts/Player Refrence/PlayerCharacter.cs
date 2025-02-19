@@ -68,6 +68,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] private float standCameraTargetHeight = 0.9f;
     [Range(0f, 1f)]
     [SerializeField] private float crouchCameraTargetHeight = 0.7f;
+    [Space]
+    [SerializeField] private bool positiveCharge = false;
 
     private CharacterState _state;
     private CharacterState _lastState;
@@ -534,5 +536,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             motor.BaseVelocity = Vector3.zero;
         }
 
+    }
+
+    public void ChargeToggle()
+    {
+        positiveCharge = !positiveCharge;
     }
 }

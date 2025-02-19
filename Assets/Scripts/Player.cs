@@ -77,6 +77,11 @@ public class Player : MonoBehaviour
                 Teleport(hit.point);
             }
         }
+
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            playerCharacter.ChargeToggle();
+        }
 #endif
 
     }
