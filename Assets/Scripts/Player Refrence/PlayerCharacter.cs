@@ -578,7 +578,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
 
-                float force = shouldAttract ? chargeEffectStrength : -chargeEffectStrength;
+                float force = shouldAttract ? -chargeEffectStrength * 2 : chargeEffectStrength; //manually multiply and adjust if custom is needed
                 currentVelocity += direction * force * deltaTime;
             }
         }
