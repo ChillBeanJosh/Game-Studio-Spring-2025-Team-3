@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using KinematicCharacterController; //needed for custom functions for character physics.
 using UnityEngine;
+using UnityEngine.Accessibility;
 
 //NOTE: Enumerators (enum) are being used for different state handlings.
 public enum CrouchInput
@@ -53,6 +54,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Range(0f, 1f)]
     [SerializeField] private float jumpSustainGravity = 0.4f;
     [SerializeField] private float gravity = -90f;
+    [SerializeField] private bool isAntiGravityActive = false;
     [Space]
     [SerializeField] private float slideStartSpeed = 25f;
     [SerializeField] private float slideEndSpeed = 15f;
@@ -69,6 +71,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [Range(0f, 1f)]
     [SerializeField] private float crouchCameraTargetHeight = 0.7f;
     [Space]
+    [SerializeField] public bool chargeToggle = false;
     [SerializeField] public bool positiveCharge = false;
     [SerializeField] private float chargeEffectStrength = 10f;
     [SerializeField] private float chargeEffectRadius = 5f;
@@ -191,7 +194,10 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //NOTE: UpdateVelocity() is called is physics tick, BY THE "KinematicCharacterMotor".
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        ApplyChargeEffect(ref currentVelocity, deltaTime);
+        if (chargeToggle)
+        {
+            ApplyChargeEffect(ref currentVelocity, deltaTime);
+        }
 
         //If the Character is grounded.
         if (motor.GroundingStatus.IsStableOnGround)
@@ -542,10 +548,19 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
     }
 
+    public void ActivateChargeToggle()
+    {
+        chargeToggle = !chargeToggle;
+    }
     public void ChargeToggle()
     {
         positiveCharge = !positiveCharge;
     }
+
+    public void ToggleAntiGravity()
+{
+    isAntiGravityActive = !isAntiGravityActive;
+}
 
 
     //Collison Checks for when player is in radius of object.
@@ -563,7 +578,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
                 Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
 
-                float force = shouldAttract ? chargeEffectStrength : -chargeEffectStrength * 5;
+                float force = shouldAttract ? chargeEffectStrength : -chargeEffectStrength;
                 currentVelocity += direction * force * deltaTime;
             }
         }

@@ -78,9 +78,19 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            playerCharacter.ActivateChargeToggle();
+        }
+
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             playerCharacter.ChargeToggle();
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            playerCharacter.ToggleAntiGravity();
         }
 #endif
 
