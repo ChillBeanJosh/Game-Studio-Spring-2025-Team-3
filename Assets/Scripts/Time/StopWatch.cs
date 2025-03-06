@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class StopWatch : MonoBehaviour
@@ -8,7 +9,7 @@ public class StopWatch : MonoBehaviour
     public TextMeshProUGUI timerText;
     private float elapsedTime;
     private bool timerActive;
-    public LayerMask stopwatchEnder;
+    public LayerMask stopwatchEnder;  // The layer mask for the stopwatch trigger
     public static string finalTime;
     private float fastestTime;
     private string currentSceneKey;
@@ -42,20 +43,26 @@ public class StopWatch : MonoBehaviour
         timerText.text = time.ToString(@"mm\:ss\:fff");
     }
 
-    private void OnCollisionEnter(Collision collision)
+    // This method is triggered when the player's collider enters the trigger zone
+    private void OnTriggerEnter(Collider other)
     {
-        if (((1 << collision.gameObject.layer) & stopwatchEnder) != 0)
+        Debug.Log("Entered trigger with: " + other.gameObject.name);
+
+        // Ensure the player interacts only with the stopwatch (use LayerMask or Tag check)
+        if (((1 << other.gameObject.layer) & stopwatchEnder) != 0)
         {
+            Cursor.lockState = CursorLockMode.None;
+
             timerActive = false;
             SaveTime();
             UpdateFastest();
 
-            // Save the last level name before switching scenes
+            // Save and switch scene
             string currentLevel = SceneManager.GetActiveScene().name;
             PlayerPrefs.SetString("LastLevel", currentLevel);
             PlayerPrefs.Save(); // Ensure it's saved immediately
 
-            sceneManager.Instance.LoadScene(sceneManager.Scene.ScoreBoard); 
+            sceneManager.Instance.LoadScene(sceneManager.Scene.ScoreBoard);
         }
     }
 
