@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     void OnDestroy()
     {
+        _inputActions.Gameplay.Disable();
+
         _inputActions.Dispose();
     }
 
