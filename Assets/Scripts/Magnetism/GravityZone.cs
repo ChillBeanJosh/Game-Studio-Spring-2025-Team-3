@@ -33,6 +33,8 @@ public class GravityZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Neutral")) return; //for the case neutral object dont get effected by magnetism.
+
         GravityZone otherMagnet = other.GetComponent<GravityZone>();
         if (otherMagnet == null || otherMagnet == this) return;
 
