@@ -370,6 +370,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   jumpSustainGravity: 0.4
   gravity: -90
+  isAntiGravityActive: 0
   slideStartSpeed: 25
   slideEndSpeed: 15
   slideFriction: 0.8
@@ -380,6 +381,7 @@ MonoBehaviour:
   crouchHeightResponse: 15
   standCameraTargetHeight: 0.9
   crouchCameraTargetHeight: 0.7
+  chargeToggle: 0
   positiveCharge: 0
   chargeEffectStrength: 350
   chargeEffectRadius: 3
@@ -395,16 +397,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0650323213b4b49ee82f49d856379769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positiveProjectilePrefab: {fileID: 2436070521703817857, guid: bb2645c104e3043ffab84b6db2a71f48, type: 3}
+  positiveProjectilePrefab: {fileID: 306329893273031556, guid: bb2645c104e3043ffab84b6db2a71f48, type: 3}
   negativeProjectilePrefab: {fileID: 2183221191693833433, guid: 67ea40ec520114e6aa80688cf27d6587, type: 3}
+  strongPositiveProjectilePrefab: {fileID: 4036312715421028526, guid: 20380ad490e1700409156cb23ffd74f6, type: 3}
+  strongNegativeProjectilePrefab: {fileID: 6216858482873730761, guid: 2370f1e2ade12e1428243a6cd9646dc4, type: 3}
   spawnPosition: {fileID: 5393877745443296855}
   targetObject: {fileID: 9189025285470015909}
   positiveMaterial: {fileID: 2100000, guid: 7d0e9435e9da74357be69b9d87585fdb, type: 2}
   negativeMaterial: {fileID: 2100000, guid: 5d2b412aa6b3b44829ddfe6ef7f59267, type: 2}
-  projectileSpeed: 20
+  spawnOffset: 1.5
+  projectileSpeed: 100
   projectileMotion: 1
   destroyAfter: 5
   cooldownTime: 1
+  chargeTimeRequired: 2
 --- !u!1 &7661038965535712332
 GameObject:
   m_ObjectHideFlags: 0

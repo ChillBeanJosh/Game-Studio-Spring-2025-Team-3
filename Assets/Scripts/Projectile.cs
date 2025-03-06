@@ -5,7 +5,10 @@ public class Projectile : MonoBehaviour
 
 
     public GameObject positiveProjectilePrefab; 
-    public GameObject negativeProjectilePrefab; 
+    public GameObject negativeProjectilePrefab;
+
+    public GameObject strongPositiveProjectilePrefab;
+    public GameObject strongNegativeProjectilePrefab;
 
     [SerializeField] private Transform spawnPosition; 
     [SerializeField] private GameObject targetObject; 
@@ -18,7 +21,14 @@ public class Projectile : MonoBehaviour
     public bool projectileMotion = false; 
 
     public float destroyAfter = 5f; 
-    public float cooldownTime = 1f; 
+    public float cooldownTime = 1f;
+
+    //Variables for Strong Projectile:
+    private bool isCharging = false;
+
+    public float chargeTimeRequired = 2f;
+    public float currentChargeTime = 0f;
+    
 
     private PlayerCharacter playerCharacter;
     private float lastFireTime;
@@ -32,9 +42,26 @@ public class Projectile : MonoBehaviour
     {
         UpdateMaterial();
 
+        //When the Key is presed Down:
         if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time >= lastFireTime + cooldownTime)
         {
+            isCharging = true;
+            currentChargeTime = 0f;
+        }
+
+        //Counts up a timer when the key is pressed down:
+        if (isCharging)
+        {
+            currentChargeTime += Time.deltaTime; 
+        }
+
+        //When the key is released:
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
             SpawnProjectile();
+
+            isCharging = false;
+            currentChargeTime = 0f; 
             lastFireTime = Time.time;
         }
     }
@@ -44,7 +71,10 @@ public class Projectile : MonoBehaviour
     {
         if (playerCharacter == null) return;
 
-        GameObject projectilePrefab = playerCharacter.positiveCharge ? positiveProjectilePrefab : negativeProjectilePrefab;
+        GameObject projectilePrefab = playerCharacter.positiveCharge 
+            ? (currentChargeTime >= chargeTimeRequired ? strongPositiveProjectilePrefab : positiveProjectilePrefab) //if the player is in the positiveCharge -> (if the charge time has elapsed -> stong positive, else -> normal positive)
+            : (currentChargeTime >= chargeTimeRequired ? strongNegativeProjectilePrefab : negativeProjectilePrefab); //else -> (if the charge time has elapsed -> strong negative, else -> normal negative)
+
         if (projectilePrefab == null)
         {
             Debug.LogError("no prefab available!!!");

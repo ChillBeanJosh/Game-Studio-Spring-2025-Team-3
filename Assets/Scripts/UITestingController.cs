@@ -5,12 +5,16 @@ public class UITestingController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI toggleStatusText;
     [SerializeField] private TextMeshProUGUI chargeStatusText;
+    [SerializeField] private TextMeshProUGUI strongChargeReadyText; 
+
     [SerializeField] private PlayerCharacter playerCharacter;
+    [SerializeField] private Projectile projectile;
 
     private void Update()
     {
         UpdateToggleStatus();
         UpdateChargeStatus();
+        UpdateStrongChargeReadyStatus();
     }
 
     private void UpdateToggleStatus()
@@ -26,6 +30,14 @@ public class UITestingController : MonoBehaviour
         if (chargeStatusText != null && playerCharacter != null)
         {
             chargeStatusText.color = playerCharacter.positiveCharge ? Color.red : Color.blue;
+        }
+    }
+
+    private void UpdateStrongChargeReadyStatus()
+    {
+        if (strongChargeReadyText != null && projectile != null)
+        {
+            strongChargeReadyText.color = projectile.currentChargeTime >= projectile.chargeTimeRequired ? Color.green : Color.red;
         }
     }
 }
