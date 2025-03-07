@@ -16,6 +16,7 @@ public class sceneManager : MonoBehaviour
         MainMenu,
         HowToPlay,
         LevelSelect,
+        JoshLevel,
         ScoreBoard
 
     }
@@ -53,5 +54,13 @@ public class sceneManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) 
+        {
+            RestartScene();
+        }
     }
 }

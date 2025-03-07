@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/LevelSelect.unity
     guid: e3f24f253bf59ad42939d12eb8edc67a
   - enabled: 1
+    path: Assets/Scenes/Build Scenes/JoshLevel.unity
+    guid: 01e56cb9732aea648b6c334fd8d420fa
+  - enabled: 1
     path: Assets/Scenes/Build Scenes/ScoreBoard.unity
     guid: 4c1303d2c87996343aa653d58d76f403
   m_configObjects:
