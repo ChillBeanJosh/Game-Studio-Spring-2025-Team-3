@@ -286,6 +286,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380889663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4202703967590850953, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
+  m_PrefabInstance: {fileID: 3775107134931176928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &539123611 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
@@ -866,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnToMainMenu: {fileID: 2002700462}
+  straightLevel: {fileID: 380889663}
   joshLevel: {fileID: 1816294948}
 --- !u!114 &1138318922
 MonoBehaviour:
@@ -1562,11 +1574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -403
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 98
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1582,7 +1594,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1913583408335341734, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_Name
-      value: LevelSelectionTemplate
+      value: Straight Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 3856590763802262130, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
+      propertyPath: m_text
+      value: Straight Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610656487703930568, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
+      propertyPath: m_text
+      value: Play
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

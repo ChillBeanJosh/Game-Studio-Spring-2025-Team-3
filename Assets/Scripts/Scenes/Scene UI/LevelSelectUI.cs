@@ -6,6 +6,7 @@ public class LevelSelectUI : MonoBehaviour
     public Button returnToMainMenu;
 
     //More Buttons for the specified levels
+    public Button straightLevel;
     public Button joshLevel;
 
     private void Start()
@@ -13,6 +14,7 @@ public class LevelSelectUI : MonoBehaviour
         returnToMainMenu.onClick.AddListener(StartMainMenu);
 
         //More Listeners for the specified levels
+        straightLevel.onClick.AddListener(StartStraightLevel);
         joshLevel.onClick.AddListener(JoshStage);
     }
 
@@ -21,6 +23,10 @@ public class LevelSelectUI : MonoBehaviour
         sceneManager.Instance.LoadMainMenu();
     }
 
+    void StartStraightLevel()
+    {
+        sceneManager.Instance.LoadScene(sceneManager.Scene.Straight_Line);
+    }
     void JoshStage()
     {
         sceneManager.Instance.LoadScene(sceneManager.Scene.JoshLevel);

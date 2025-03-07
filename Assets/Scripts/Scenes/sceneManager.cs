@@ -16,6 +16,7 @@ public class sceneManager : MonoBehaviour
         MainMenu,
         HowToPlay,
         LevelSelect,
+        Straight_Line,
         JoshLevel,
         ScoreBoard
 
@@ -58,9 +59,14 @@ public class sceneManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) 
+        if (Input.GetKeyDown(KeyCode.O)) 
         {
             RestartScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadMainMenu();
         }
     }
 }
