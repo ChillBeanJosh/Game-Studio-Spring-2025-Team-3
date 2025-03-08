@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/Rooftop_Runs.unity
     guid: 17b3db7106267ba45a1c92dd7893975a
   - enabled: 1
+    path: Assets/Scenes/Build Scenes/Ill_Be_Okay.unity
+    guid: 7a6ac013d392dec41a2386f2600a14a6
+  - enabled: 1
     path: Assets/Scenes/Build Scenes/Fly_High.unity
     guid: 01e56cb9732aea648b6c334fd8d420fa
   - enabled: 1
