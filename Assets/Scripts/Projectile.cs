@@ -61,21 +61,19 @@ public class Projectile : MonoBehaviour
             SpawnProjectile();
 
             isCharging = false;
+            currentChargeTime = 0f; 
+            lastFireTime = Time.time;
         }
     }
 
     //Spawn Orbs:
     void SpawnProjectile()
     {
-        if (Time.time < lastFireTime + cooldownTime) return;
-
         if (playerCharacter == null) return;
 
-        bool isStrongProjectile = currentChargeTime >= chargeTimeRequired; 
-
-        GameObject projectilePrefab = playerCharacter.positiveCharge
-            ? (isStrongProjectile ? strongPositiveProjectilePrefab : positiveProjectilePrefab)
-            : (isStrongProjectile ? strongNegativeProjectilePrefab : negativeProjectilePrefab);
+        GameObject projectilePrefab = playerCharacter.positiveCharge 
+            ? (currentChargeTime >= chargeTimeRequired ? strongPositiveProjectilePrefab : positiveProjectilePrefab) //if the player is in the positiveCharge -> (if the charge time has elapsed -> stong positive, else -> normal positive)
+            : (currentChargeTime >= chargeTimeRequired ? strongNegativeProjectilePrefab : negativeProjectilePrefab); //else -> (if the charge time has elapsed -> strong negative, else -> normal negative)
 
         if (projectilePrefab == null)
         {
@@ -101,10 +99,6 @@ public class Projectile : MonoBehaviour
         }
 
         Destroy(projectile, destroyAfter);
-
-        lastFireTime = Time.time;
-        currentChargeTime = 0f;
-        isCharging = false;
     }
 
     //Color Changer:
