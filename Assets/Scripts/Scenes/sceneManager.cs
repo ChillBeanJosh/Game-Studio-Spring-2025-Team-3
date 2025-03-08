@@ -19,7 +19,7 @@ public class sceneManager : MonoBehaviour
         Straight_Line,
         Climbing_Up,
         Changing_Charges,
-        JoshLevel,
+        Fly_High,
         ScoreBoard
 
     }

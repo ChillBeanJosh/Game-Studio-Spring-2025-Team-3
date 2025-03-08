@@ -45,7 +45,7 @@ public class LevelSelectUI : MonoBehaviour
 
     void JoshStage()
     {
-        sceneManager.Instance.LoadScene(sceneManager.Scene.JoshLevel);
+        sceneManager.Instance.LoadScene(sceneManager.Scene.Fly_High);
     }
 
 }
