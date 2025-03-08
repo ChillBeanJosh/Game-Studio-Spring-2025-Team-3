@@ -17,6 +17,8 @@ public class sceneManager : MonoBehaviour
         HowToPlay,
         LevelSelect,
         Straight_Line,
+        Climbing_Up,
+        Changing_Charges,
         JoshLevel,
         ScoreBoard
 
@@ -66,6 +68,7 @@ public class sceneManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Cursor.lockState = CursorLockMode.None;
             LoadMainMenu();
         }
     }
