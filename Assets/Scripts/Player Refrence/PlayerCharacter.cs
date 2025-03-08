@@ -181,7 +181,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         var rootTargetScale = new Vector3(1f, normalizedHeight, 1f);
 
         //Scales the Root/Mesh to the specified target scale from above.
-        /*
         root.localScale = Vector3.Lerp
         (
             a: root.localScale,
@@ -189,7 +188,6 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             t: 1f - Mathf.Exp(-crouchHeightResponse * deltaTime)
         );
 
-        */
         
     }
 
