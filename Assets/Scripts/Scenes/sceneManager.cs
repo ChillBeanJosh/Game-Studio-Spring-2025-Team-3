@@ -19,6 +19,7 @@ public class sceneManager : MonoBehaviour
         Straight_Line,
         Climbing_Up,
         Changing_Charges,
+        Rooftop_Runs,
         Fly_High,
         ScoreBoard
 

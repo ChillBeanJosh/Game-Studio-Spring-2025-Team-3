@@ -9,6 +9,7 @@ public class LevelSelectUI : MonoBehaviour
     public Button straightLevel;
     public Button climbingLevel;
     public Button changingLevel;
+    public Button roofLevel;
     public Button joshLevel;
 
     private void Start()
@@ -19,6 +20,7 @@ public class LevelSelectUI : MonoBehaviour
         straightLevel.onClick.AddListener(StartStraightLevel);
         climbingLevel.onClick.AddListener(StartClimbLevel);
         changingLevel.onClick.AddListener(StartChangingLevel);
+        roofLevel.onClick.AddListener(StartRooflevel);
 
         joshLevel.onClick.AddListener(JoshStage);
     }
@@ -41,6 +43,11 @@ public class LevelSelectUI : MonoBehaviour
     void StartChangingLevel()
     {
         sceneManager.Instance.LoadScene(sceneManager.Scene.Changing_Charges);
+    }
+
+    void StartRooflevel()
+    {
+        sceneManager.Instance.LoadScene(sceneManager.Scene.Rooftop_Runs);
     }
 
     void JoshStage()
