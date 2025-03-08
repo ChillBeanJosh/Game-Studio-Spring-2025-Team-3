@@ -406,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3856590763802262130, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_text
-      value: Josh's Level
+      value: Fly High
       objectReference: {fileID: 0}
     - target: {fileID: 6610656487703930568, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_text

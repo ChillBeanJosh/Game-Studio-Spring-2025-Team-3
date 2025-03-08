@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/Changing_Charges.unity
     guid: 09180446ca63cc54399a519a8b74016d
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/JoshLevel.unity
+    path: Assets/Scenes/Build Scenes/Fly_High.unity
     guid: 01e56cb9732aea648b6c334fd8d420fa
   - enabled: 1
     path: Assets/Scenes/Build Scenes/ScoreBoard.unity
