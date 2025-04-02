@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PlayerCamera playerCamera;
+    [Space]
+    [SerializeField] private CameraSpring cameraSpring;
+    [SerializeField] private CameraLean cameraLean;
 
     private PlayerInputActions _inputActions;
 
@@ -25,6 +28,12 @@ public class Player : MonoBehaviour
         //Function called from PlayerCamera Class.
         //Gets refrence to the GetCameraTarget() Transform.
         playerCamera.Initialize(playerCharacter.GetCameraTarget());
+
+        //Function called from CameraSpring Class.
+        cameraSpring.Initialize();
+
+        //Function called from CameraLean Class.
+        cameraLean.Initialize();
     }
 
     void OnDestroy()
@@ -70,7 +79,6 @@ public class Player : MonoBehaviour
         playerCharacter.UpdateBody(deltaTime);
 
 
-#if UNITY_EDITOR
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             var ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
@@ -94,7 +102,23 @@ public class Player : MonoBehaviour
         {
             playerCharacter.ToggleAntiGravity();
         }
-#endif
+    }
+
+    private void LateUpdate()
+    {
+        var deltaTime = Time.deltaTime;
+        var state = playerCharacter.GetState();
+
+        cameraSpring.UpdateSpring(deltaTime, playerCharacter.GetCameraTarget().up);
+
+        cameraLean.UpdateLean
+        (
+            deltaTime, 
+            state.Stance is Stance.Slide, 
+            state.Acceleration, 
+            playerCharacter.GetCameraTarget().up
+        );
+
 
     }
 
