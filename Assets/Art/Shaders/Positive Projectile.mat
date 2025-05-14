@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Magnetic Test
+  m_Name: Positive Projectile
   m_Shader: {fileID: -6465566751694194690, guid: f58454a321a3baa4aa350e2c7444e164, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -138,8 +138,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Base_Color: {r: 0, g: 0.11807448, b: 1.3773584, a: 0}
-    - _Fresnel_Color_1: {r: 0, g: 1.0190061, b: 101.43396, a: 0}
+    - _Fresnel_Base_Color: {r: 1.7547873, g: 0.27562106, b: 0.7379847, a: 0}
+    - _Fresnel_Color_1: {r: 11.572328, g: 3.3929336, b: 5.444998, a: 0}
     - _Fresnel_Color_2: {r: 0.066039324, g: 0, b: 0.5, a: 1}
     - _Noise_Scroll: {r: 5, g: 0, b: 0, a: 0}
     - _Noise_Tiling: {r: 1, g: 163.7, b: 0, a: 0}
