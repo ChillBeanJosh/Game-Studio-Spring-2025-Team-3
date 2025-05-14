@@ -13,12 +13,14 @@ public class sceneManager : MonoBehaviour
     //List of Scenes in the build Index, make sure they are in ORDER.
     public enum Scene
     {
-        MainMenu,
+        mainMenu_Assets,
         HowToPlay,
         LevelSelect,
         Straight_Line,
         Climbing_Up,
         Changing_Charges,
+        Rooftop_Runs,
+        Railgun,
         Fly_High,
         ScoreBoard
 
@@ -50,7 +52,7 @@ public class sceneManager : MonoBehaviour
     //Loads the Main Menu Scene.
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(Scene.MainMenu.ToString());
+        SceneManager.LoadScene(Scene.mainMenu_Assets.ToString());
     }
 
     //Restarts the current Scene.
