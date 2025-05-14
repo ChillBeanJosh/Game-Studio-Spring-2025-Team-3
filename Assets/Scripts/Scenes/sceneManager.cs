@@ -20,7 +20,7 @@ public class sceneManager : MonoBehaviour
         Climbing_Up,
         Changing_Charges,
         Rooftop_Runs,
-        Ill_Be_Okay,
+        Railgun,
         Fly_High,
         ScoreBoard
 
