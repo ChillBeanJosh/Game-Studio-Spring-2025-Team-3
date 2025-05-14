@@ -1,11 +1,16 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UITestingController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI toggleStatusText;
     [SerializeField] private TextMeshProUGUI chargeStatusText;
-    [SerializeField] private TextMeshProUGUI strongChargeReadyText; 
+    [SerializeField] private TextMeshProUGUI strongChargeReadyText;
+    [SerializeField] private Image reticle;
+    [SerializeField] private Sprite positive;
+    [SerializeField] private Sprite negative;
+
 
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private Projectile projectile;
@@ -15,6 +20,7 @@ public class UITestingController : MonoBehaviour
         UpdateToggleStatus();
         UpdateChargeStatus();
         UpdateStrongChargeReadyStatus();
+        UpdateReticleStatus();
     }
 
     private void UpdateToggleStatus()
@@ -39,5 +45,14 @@ public class UITestingController : MonoBehaviour
         {
             strongChargeReadyText.color = projectile.currentChargeTime >= projectile.chargeTimeRequired ? Color.green : Color.red;
         }
+    }
+
+    private void UpdateReticleStatus()
+    {
+        if (reticle != null && playerCharacter != null)
+        {
+            reticle.sprite = playerCharacter.positiveCharge ? positive : negative;
+        }
+
     }
 }

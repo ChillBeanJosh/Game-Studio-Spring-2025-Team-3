@@ -1883,6 +1883,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982340030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9195334720870369753, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+  m_PrefabInstance: {fileID: 769659191816942722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2040987375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1988,9 +1999,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1687212124176122651, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 1982340030}
+    - target: {fileID: 1687212124176122651, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: negative
+      value: 
+      objectReference: {fileID: 21300000, guid: 40a44cb709919d1409d7abf037a3d245, type: 3}
+    - target: {fileID: 1687212124176122651, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: positive
+      value: 
+      objectReference: {fileID: 21300000, guid: 12b65e7411303434e9a0ce6ed1070bef, type: 3}
     - target: {fileID: 1818184476495848298, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866860514559258169, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866860514559258169, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866860514559258169, guid: ab98798aebbad47bda6d206a1a53a368, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2399,6 +2434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Negative Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 2231250011182254391, guid: 213284aefeb46b04aaf1fb4dd6b614ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 272ebcb8c8555e740bf637ef7e2e2722, type: 2}
     - target: {fileID: 5603870532696724270, guid: 213284aefeb46b04aaf1fb4dd6b614ff, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -2456,6 +2495,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4392948206934535052, guid: 1d9756359c89ab141b8e98a17e3bf4fc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 272ebcb8c8555e740bf637ef7e2e2722, type: 2}
     - target: {fileID: 8384092895189037947, guid: 1d9756359c89ab141b8e98a17e3bf4fc, type: 3}
       propertyPath: m_Name
       value: Negative Ground
@@ -2473,6 +2516,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 413870215050983415, guid: f74067bf855430b4cad5f6956c2c522d, type: 3}
+      propertyPath: neutralMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: c8b61193ac9ab2d4f8610bdedba69fbd, type: 2}
+    - target: {fileID: 413870215050983415, guid: f74067bf855430b4cad5f6956c2c522d, type: 3}
+      propertyPath: negativeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 272ebcb8c8555e740bf637ef7e2e2722, type: 2}
     - target: {fileID: 2835677341541180147, guid: f74067bf855430b4cad5f6956c2c522d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.77
@@ -2517,6 +2568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Neutral Wall '
       objectReference: {fileID: 0}
+    - target: {fileID: 7635655843250324351, guid: f74067bf855430b4cad5f6956c2c522d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c8b61193ac9ab2d4f8610bdedba69fbd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2570,6 +2625,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3707340906500016741, guid: 39545762a0c69e748b42ed37dd3608f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 272ebcb8c8555e740bf637ef7e2e2722, type: 2}
     - target: {fileID: 9173949059416277603, guid: 39545762a0c69e748b42ed37dd3608f3, type: 3}
       propertyPath: m_Name
       value: Negative Dummy
