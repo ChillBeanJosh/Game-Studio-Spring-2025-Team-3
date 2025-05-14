@@ -10,6 +10,7 @@ public class StopWatch : MonoBehaviour
     private float elapsedTime;
     private bool timerActive;
     public LayerMask stopwatchEnder;  // The layer mask for the stopwatch trigger
+    public LayerMask resetLevel;
     public static string finalTime;
     private float fastestTime;
     private string currentSceneKey;
@@ -63,6 +64,12 @@ public class StopWatch : MonoBehaviour
             PlayerPrefs.Save(); // Ensure it's saved immediately
 
             sceneManager.Instance.LoadScene(sceneManager.Scene.ScoreBoard);
+        }
+
+
+        if (((1 << other.gameObject.layer) & resetLevel) != 0)
+        {
+            sceneManager.Instance.RestartScene();
         }
     }
 
