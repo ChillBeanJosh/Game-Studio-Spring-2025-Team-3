@@ -687,6 +687,9 @@ MonoBehaviour:
   toggleStatusText: {fileID: 1815171682093938585}
   chargeStatusText: {fileID: 5409806850506091067}
   strongChargeReadyText: {fileID: 4825926171259676052}
+  reticle: {fileID: 9195334720870369753}
+  positive: {fileID: 21300000, guid: 12b65e7411303434e9a0ce6ed1070bef, type: 3}
+  negative: {fileID: 21300000, guid: 40a44cb709919d1409d7abf037a3d245, type: 3}
   playerCharacter: {fileID: 1607300850911945577}
   projectile: {fileID: 7916249232082846548}
 --- !u!1 &4890562880772962893
@@ -932,7 +935,7 @@ RectTransform:
   m_GameObject: {fileID: 6555795929070005998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1958949443888932290}
