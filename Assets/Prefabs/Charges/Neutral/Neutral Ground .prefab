@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8b61193ac9ab2d4f8610bdedba69fbd, type: 2}
+  - {fileID: 2100000, guid: 58016f2d098a4bd4b88e9fe9a06b6c31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1307fc4723e426c4fbfe9c03faa98258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positiveMaterial: {fileID: 2100000, guid: 7d0e9435e9da74357be69b9d87585fdb, type: 2}
-  negativeMaterial: {fileID: 2100000, guid: 272ebcb8c8555e740bf637ef7e2e2722, type: 2}
-  neutralMaterial: {fileID: 2100000, guid: c8b61193ac9ab2d4f8610bdedba69fbd, type: 2}
+  positiveMaterial: {fileID: 2100000, guid: d7173c0f0952a574c813bc1586219ae9, type: 2}
+  negativeMaterial: {fileID: 2100000, guid: c8b61193ac9ab2d4f8610bdedba69fbd, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: 58016f2d098a4bd4b88e9fe9a06b6c31, type: 2}
   effectDuration: 5
   chosenCollider: {fileID: 8646393427598206535}
 --- !u!114 &5927180337535791228

@@ -54,7 +54,7 @@ public class LevelSelectUI : MonoBehaviour
 
     void StartKayLevel()
     {
-        sceneManager.Instance.LoadScene(sceneManager.Scene.Ill_Be_Okay);
+        sceneManager.Instance.LoadScene(sceneManager.Scene.Railgun);
     }
 
     void JoshStage()
