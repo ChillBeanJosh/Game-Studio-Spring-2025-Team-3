@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Josh level
       objectReference: {fileID: 0}
+    - target: {fileID: 1913583408335341734, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3856590763802262130, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_text
       value: FLY HIGH
@@ -503,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 202
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 1107357418302894386, guid: eacfb7b4b7e881947a86680271659edc, type: 3}
       propertyPath: m_AnchoredPosition.y
