@@ -33,6 +33,7 @@ public class BasicWaveMotion : MonoBehaviour
     [Header("Wave Config:")]
     //# of Harmonic Waves, Used For SuperPosition When Combining Multiple Waves:
     public int waveCount = 5;
+    public int previousWaveCount;
     [Space]
 
     //Varying Magnitude Range For Waves, Used For Unique Wave Generation:
@@ -72,6 +73,7 @@ public class BasicWaveMotion : MonoBehaviour
         //Setup The Mesh Displacement Vector Positions (ALLOCATING MEMORY -> HAVE A VECTOR3 ARRAY ONLY DEFINING ITS SIZE TO BE THE SAME AS THE DEFAULT POSITION VERTICIES SIZE, NO VALUES SET YET):
         displacedPositions = new Vector3[originalPositions.Length];
 
+        previousWaveCount = waveCount;
         previousIsOneDimension = isOneDimension;
         GenerateWaveList();
     }
@@ -120,6 +122,12 @@ public class BasicWaveMotion : MonoBehaviour
 
     void Update()
     {
+        if (previousWaveCount != waveCount)
+        {
+            previousWaveCount = waveCount;
+            GenerateWaveList();
+        }
+
         if (previousIsOneDimension != isOneDimension)
         {
             previousIsOneDimension = isOneDimension;
