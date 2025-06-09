@@ -33,13 +33,13 @@ public class BasicWaveMotion : MonoBehaviour
     [Header("Wave Config:")]
     //# of Harmonic Waves, Used For SuperPosition When Combining Multiple Waves:
     public int waveCount = 5;
-    public int previousWaveCount;
+    private int previousWaveCount;
     [Space]
 
     //Varying Magnitude Range For Waves, Used For Unique Wave Generation:
-    public float minAmplitude = 0.50f;
-    public float baseAmplitude = 0.75f;
-    public float maxAmplitude = 1.00f;
+    public float minAmplitude = 0.1f;
+    public float baseAmplitude = 0.2f;
+    public float maxAmplitude = 0.3f;
     [Space]
 
     //Varying Distance Between Repition of the Shape of the Wave, Used For Unique Wave Generation:
@@ -61,6 +61,14 @@ public class BasicWaveMotion : MonoBehaviour
     List<Wave> waves;
 
 
+    //Lerp Smoothing, Used To Easily Transition From Verticies:
+    [Range(0f, 1f)]
+    public float Smoothing = 0.15f;
+
+    //Store Previous Frames of the Y-Positions:
+    float[] previousHeights;
+
+
     void Start()
     {
         //Setup The Mesh Surface:
@@ -72,6 +80,9 @@ public class BasicWaveMotion : MonoBehaviour
 
         //Setup The Mesh Displacement Vector Positions (ALLOCATING MEMORY -> HAVE A VECTOR3 ARRAY ONLY DEFINING ITS SIZE TO BE THE SAME AS THE DEFAULT POSITION VERTICIES SIZE, NO VALUES SET YET):
         displacedPositions = new Vector3[originalPositions.Length];
+
+        //Setup The Previous Positions, Empty Array in Equal Size to the Amount of Available points from all the vericies on the Y-Axis:
+        previousHeights = new float[originalPositions.Length];
 
         previousWaveCount = waveCount;
         previousIsOneDimension = isOneDimension;
@@ -142,7 +153,6 @@ public class BasicWaveMotion : MonoBehaviour
         {
             //Temp Value -> Used To Hold The Information Of Current Vertice:
             Vector3 defaultPosition = originalPositions[i];
-
             Vector3 worldPosition = transform.TransformPoint(defaultPosition);
 
             //Initially Setting Y = 0, (NO WAVE YET, ONLY EQUILIBRIUM):
@@ -158,6 +168,10 @@ public class BasicWaveMotion : MonoBehaviour
 
                 displacedHeight += wave.Amplitude * Mathf.Sin(phase);
             }
+
+            //Smooth Lerping:
+            float smoothHeight = Mathf.Lerp(previousHeights[i], displacedHeight, 1f - Mathf.Exp(-(Smoothing) * Time.deltaTime));
+            previousHeights[i] = smoothHeight;
 
             //After Iterating Through All Waves in the Provided Length -> Apply The Calculated Height to Displacement Positions:
             displacedPositions[i] = new Vector3(defaultPosition.x, displacedHeight, defaultPosition.z);

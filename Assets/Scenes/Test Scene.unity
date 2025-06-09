@@ -1477,16 +1477,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1f7db6fec04445895967da76acf41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCount: 10
-  previousWaveCount: 0
-  minAmplitude: 0.5
-  baseAmplitude: 0.75
-  maxAmplitude: 1
+  waveCount: 75
+  minAmplitude: 0.1
+  baseAmplitude: 0.2
+  maxAmplitude: 0.3
   minWaveLength: 1
   maxWaveLength: 10
   minSpeed: 1
   maxSpeed: 4
   isOneDimension: 0
+  Smoothing: 0.15
 --- !u!64 &1631013696
 MeshCollider:
   m_ObjectHideFlags: 0
