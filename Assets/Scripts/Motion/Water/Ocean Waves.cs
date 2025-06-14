@@ -130,7 +130,7 @@ public class OceanWaves : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (previousWaveCount != waveCount)
         {
@@ -187,6 +187,24 @@ public class OceanWaves : MonoBehaviour
         //Force Unity to Refresh the Collider:
         surfaceCollider.sharedMesh = null;
         surfaceCollider.sharedMesh = surface;
-        
+    }
+
+    //Information Collection Function, Outputs The Wave Height at The Specified Vector3 Position:
+    public float GetWaveHeightAtPosition(Vector3 worldPosition)
+    {
+        float time = Time.time;
+        float height = 0f;
+
+        foreach (var wave in waves)
+        {
+            float k = wave.k;
+            float w = wave.waveSpeed * k;
+            float dot = Vector3.Dot(wave.direction, new Vector3(worldPosition.x, 0f, worldPosition.z));
+            float phase = (k * dot) - (w * time);
+
+            height += wave.Amplitude * Mathf.Sin(phase);
+        }
+
+        return height;
     }
 }
