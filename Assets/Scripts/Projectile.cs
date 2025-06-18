@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
         }
 
         //When the key is released:
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+        if (Input.GetKeyUp(KeyCode.Alpha1))
         {
             SpawnProjectile();
 

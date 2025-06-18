@@ -124,7 +124,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
 
         var wasRequestingJump = _requestedJump;
 
-        //True if -> Already = true OR when jump input is pressed.
+        //True if -> Already == true OR when jump input is pressed.
         _requestedJump = _requestedJump || input.Jump;
 
         if (_requestedJump && !wasRequestingJump)
@@ -197,6 +197,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     //NOTE: UpdateVelocity() is called is physics tick, BY THE "KinematicCharacterMotor".
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+      
+
         if (chargeToggle)
         {
             ApplyChargeEffect(ref currentVelocity, deltaTime);
@@ -450,6 +452,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             currentRotation = Quaternion.LookRotation(forward, motor.CharacterUp);
         }
+
+        MatchPlanetRotation(ref currentRotation, deltaTime);
     }
     
 
@@ -598,4 +602,52 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
             }
         }
     }
+
+    public void MatchPlanetRotation(ref Quaternion currentRotation, float deltaTime)
+    {
+        Collider[] hitColliders = Physics.OverlapCapsule(transform.position + Vector3.up * 0.5f, transform.position + Vector3.down * 0.3f, 0.5f);
+
+
+        PlanetZone closestZone = null;
+        float closestDistance = float.MaxValue;
+
+
+        foreach (var hitCollider in hitColliders)
+        {
+            //If The Player Capsule is Within the Planet Radius:
+            if (hitCollider.CompareTag("PlanetRadius") && hitCollider.TryGetComponent(out PlanetZone planetZone))
+            {
+                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestZone = planetZone;
+                }
+            }
+
+
+            if (closestZone != null)
+            {
+                Vector3 desiredUp = -closestZone.GetGravityDirection(transform.position);
+                Vector3 currentUp = currentRotation * Vector3.up;
+
+                // Smoothly rotate from current up to desired up
+                Quaternion fromToUp = Quaternion.FromToRotation(currentUp, desiredUp);
+                Quaternion targetRotation = fromToUp * currentRotation;
+
+                // Optional: blend for smooth transition
+                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 5f);
+            }
+            else
+            {
+                // No planet nearby — reset to world up
+                Vector3 currentUp = currentRotation * Vector3.up;
+                Quaternion fromToUp = Quaternion.FromToRotation(currentUp, Vector3.up);
+                Quaternion targetRotation = fromToUp * currentRotation;
+
+                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 2f);
+            }
+        }
+    }
 }
+    

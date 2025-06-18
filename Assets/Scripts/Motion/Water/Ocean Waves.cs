@@ -57,7 +57,7 @@ public class OceanWaves : MonoBehaviour
     [Space]
 
     //List Holder, Used To Hold All Generated Unique Waves:
-    List<Wave> waves;
+    public List<Wave> waves;
 
 
     //Lerp Smoothing, Used To Easily Transition From Verticies:

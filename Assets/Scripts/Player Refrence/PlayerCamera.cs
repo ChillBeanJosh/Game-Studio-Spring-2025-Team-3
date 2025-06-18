@@ -33,6 +33,7 @@ public class PlayerCamera : MonoBehaviour
         _eulerAngles.x = Mathf.Clamp(_eulerAngles.x, -89f, 89f); //clamp y axis for no flipping
 
         transform.eulerAngles = _eulerAngles;
+
     }
 
 

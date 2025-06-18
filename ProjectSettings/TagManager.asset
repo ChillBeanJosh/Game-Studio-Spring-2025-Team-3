@@ -7,6 +7,7 @@ TagManager:
   - Negative
   - Positive
   - Neutral
+  - PlanetRadius
   layers:
   - Default
   - TransparentFX
