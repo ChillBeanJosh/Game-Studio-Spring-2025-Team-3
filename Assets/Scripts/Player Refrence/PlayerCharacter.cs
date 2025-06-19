@@ -76,6 +76,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     [SerializeField] public bool positiveCharge = false;
     [SerializeField] private float chargeEffectStrength = 10f;
     [SerializeField] private float chargeEffectRadius = 5f;
+    [Space]
+    [SerializeField] private PlanetZone _activePlanet = null;
 
     private CharacterState _state;
     private CharacterState _lastState;
@@ -607,8 +609,7 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
     {
         Collider[] hitColliders = Physics.OverlapCapsule(transform.position + Vector3.up * 0.5f, transform.position + Vector3.down * 0.3f, 0.5f);
 
-
-        PlanetZone closestZone = null;
+        PlanetZone foundZone = null;
         float closestDistance = float.MaxValue;
 
 
@@ -621,32 +622,45 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestZone = planetZone;
+                    foundZone = planetZone;
                 }
             }
+        }
 
+        if (foundZone != null)
+        {
+            _activePlanet = foundZone;
 
-            if (closestZone != null)
+            Vector3 desiredUp = -_activePlanet.GetGravityDirection(transform.position);
+            Vector3 currentForward = Vector3.ProjectOnPlane(currentRotation * Vector3.forward, desiredUp).normalized;
+
+            if (currentForward == Vector3.zero)
             {
-                Vector3 desiredUp = -closestZone.GetGravityDirection(transform.position);
-                Vector3 currentUp = currentRotation * Vector3.up;
-
-                // Smoothly rotate from current up to desired up
-                Quaternion fromToUp = Quaternion.FromToRotation(currentUp, desiredUp);
-                Quaternion targetRotation = fromToUp * currentRotation;
-
-                // Optional: blend for smooth transition
-                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 5f);
+                currentForward = Vector3.ProjectOnPlane(transform.forward, desiredUp).normalized;
             }
-            else
+
+            Quaternion targetRotation = Quaternion.LookRotation(currentForward, desiredUp);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 5f);
+        }
+        else
+        {
+            //If Not Within Range:
+            if (_activePlanet != null)
             {
-                // No planet nearby — reset to world up
-                Vector3 currentUp = currentRotation * Vector3.up;
-                Quaternion fromToUp = Quaternion.FromToRotation(currentUp, Vector3.up);
-                Quaternion targetRotation = fromToUp * currentRotation;
-
-                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 2f);
+                //Clear PlanetZone Refrence:
+                _activePlanet = null;
             }
+
+            Vector3 desiredUp = Vector3.up;
+            Vector3 currentForward = Vector3.ProjectOnPlane(currentRotation * Vector3.forward, desiredUp).normalized;
+
+            if (currentForward == Vector3.zero)
+            {
+                currentForward = Vector3.ProjectOnPlane(transform.forward, desiredUp).normalized;
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(currentForward, desiredUp);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * 2f);
         }
     }
 }

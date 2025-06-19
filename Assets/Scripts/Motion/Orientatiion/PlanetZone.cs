@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlanetZone : MonoBehaviour
 {
     public float gravityStrength = -90f;
-
-    [Tooltip("Local offset for gravity center if needed")]
     public Vector3 gravityCenterOffset = Vector3.zero;
+    [Space]
 
+    public SphereCollider _gravityTrigger;
+    public float GravityRadius => _gravityTrigger != null ? _gravityTrigger.radius * transform.lossyScale.x : 0f;
 
 
     public Vector3 GetGravityDirection(Vector3 characterPosition)
@@ -21,13 +22,4 @@ public class PlanetZone : MonoBehaviour
     {
         return gravityStrength;
     }
-
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position + gravityCenterOffset, 0.5f);
-    }
-
 }
