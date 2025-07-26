@@ -1116,6 +1116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityStrength: 0
   gravityCenterOffset: {x: 0, y: 0, z: 0}
+  _gravityTrigger: {fileID: 0}
 --- !u!135 &697238206
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2547,7 +2548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3951355151991801433, guid: 67ea40ec520114e6aa80688cf27d6587, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.56
+      value: 35.49
       objectReference: {fileID: 0}
     - target: {fileID: 3951355151991801433, guid: 67ea40ec520114e6aa80688cf27d6587, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2555,7 +2556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3951355151991801433, guid: 67ea40ec520114e6aa80688cf27d6587, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.901024
+      value: 63.97
       objectReference: {fileID: 0}
     - target: {fileID: 3951355151991801433, guid: 67ea40ec520114e6aa80688cf27d6587, type: 3}
       propertyPath: m_LocalRotation.w
