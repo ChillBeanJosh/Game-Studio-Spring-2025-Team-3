@@ -26,6 +26,8 @@ public class OceanWaves : MonoBehaviour
 
         public float k => (2 * Mathf.PI) / Wavelength;
         public float w => (k * waveSpeed);
+
+        public float phase;
     }
 
 
@@ -123,7 +125,9 @@ public class OceanWaves : MonoBehaviour
 
                 waveSpeed = Random.Range(minSpeed, maxSpeed),
 
-                direction = dir
+                direction = dir,
+
+                phase = Random.Range(0f, 2 * Mathf.PI)
             });
         }
 
@@ -155,7 +159,10 @@ public class OceanWaves : MonoBehaviour
             Vector3 worldPosition = transform.TransformPoint(defaultPosition);
 
             //Initially Setting Y = 0, (NO WAVE YET, ONLY EQUILIBRIUM):
-            float displacedHeight = 0f;
+            float displacementY = 0f;
+
+            float displacementX = 0f;
+            float displacementZ = 0f;
 
             //Summation of Multiple Sine Waves (WAVE SUPERPOSITION):
             foreach (var wave in waves)
@@ -163,17 +170,21 @@ public class OceanWaves : MonoBehaviour
                 float k = wave.k;
                 float w = (wave.waveSpeed * k);
                 float dot = Vector3.Dot(wave.direction, new Vector3(worldPosition.x, 0f, worldPosition.z));
-                float phase = (k * dot) - (w * time);
+                float phase = wave.phase;
+                float wavephase = (k * dot) - (w * time) + phase;
 
-                displacedHeight += wave.Amplitude * Mathf.Sin(phase);
+                displacementY += wave.Amplitude * Mathf.Sin(wavephase);
+
+                displacementX += wave.direction.x * wave.Amplitude * Mathf.Cos(wavephase);
+                displacementZ += wave.direction.z * wave.Amplitude * Mathf.Cos(wavephase);
             }
 
             //Smooth Lerping:
-            float smoothHeight = Mathf.Lerp(previousHeights[i], displacedHeight, 1f - Mathf.Exp(-(Smoothing) * Time.deltaTime));
+            float smoothHeight = Mathf.Lerp(previousHeights[i], displacementY, 1f - Mathf.Exp(-(Smoothing) * Time.deltaTime));
             previousHeights[i] = smoothHeight;
 
             //After Iterating Through All Waves in the Provided Length -> Apply The Calculated Height to Displacement Positions:
-            displacedPositions[i] = new Vector3(defaultPosition.x, displacedHeight, defaultPosition.z);
+            displacedPositions[i] = new Vector3(defaultPosition.x, displacementY, defaultPosition.z);
 
             //  *[STEPS ABOVE REPEATED FOR ALL OTHER EXISITNG VERTICIES]*
         }
