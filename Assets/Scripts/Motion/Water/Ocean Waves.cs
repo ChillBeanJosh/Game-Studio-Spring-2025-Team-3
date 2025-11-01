@@ -184,7 +184,7 @@ public class OceanWaves : MonoBehaviour
             previousHeights[i] = smoothHeight;
 
             //After Iterating Through All Waves in the Provided Length -> Apply The Calculated Height to Displacement Positions:
-            displacedPositions[i] = new Vector3(defaultPosition.x, displacementY, defaultPosition.z);
+            displacedPositions[i] = defaultPosition + new Vector3(displacementX, displacementY, displacementZ);
 
             //  *[STEPS ABOVE REPEATED FOR ALL OTHER EXISITNG VERTICIES]*
         }

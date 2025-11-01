@@ -1685,7 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e5310a73d95f4da4f0cad8ccb287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCount: 15
+  waveCount: 20
   minAmplitude: 0.1
   baseAmplitude: 0.2
   maxAmplitude: 0.3
@@ -73532,6 +73532,10 @@ PrefabInstance:
     - target: {fileID: 416697301220706479, guid: 5e52bd5684f6adb428f0098d982cd66e, type: 3}
       propertyPath: m_Name
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 416697301220706479, guid: 5e52bd5684f6adb428f0098d982cd66e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3746240335054651097, guid: 5e52bd5684f6adb428f0098d982cd66e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
