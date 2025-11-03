@@ -28,6 +28,8 @@ public class OceanWaves : MonoBehaviour
         public float w => (k * waveSpeed);
 
         public float phase;
+
+        public float steepness;
     }
 
 
@@ -53,18 +55,32 @@ public class OceanWaves : MonoBehaviour
     public float maxSpeed = 4f;
     [Space]
 
+    [Header("Dimension Toggle:")]
     //Test Switch For 1D -> 2D Wave:
     public bool isOneDimension = false;
     private bool previousIsOneDimension;
     [Space]
 
+    [Header("Wave List:")]
     //List Holder, Used To Hold All Generated Unique Waves:
     public List<Wave> waves;
 
-
+    [Header("Wave Behavior:")]
     //Lerp Smoothing, Used To Easily Transition From Verticies:
     [Range(0f, 1f)]
     public float Smoothing = 0.15f;
+    private float previousSmoothing;
+    [Space]
+
+    [Range(0f, 1f)] 
+    public float globalSteepness = 0.6f;
+    private float previousGlobalSteepness;
+    [Space]
+
+    public bool allowWaveFolding;
+    private bool previousAllowWaveFolding;
+
+
 
     //Store Previous Frames of the Y-Positions:
     float[] previousHeights;
@@ -87,6 +103,10 @@ public class OceanWaves : MonoBehaviour
 
         previousWaveCount = waveCount;
         previousIsOneDimension = isOneDimension;
+        previousSmoothing = Smoothing;
+        previousGlobalSteepness = globalSteepness;
+        previousAllowWaveFolding = allowWaveFolding;
+
         GenerateWaveList();
     }
 
@@ -127,7 +147,9 @@ public class OceanWaves : MonoBehaviour
 
                 direction = dir,
 
-                phase = Random.Range(0f, 2 * Mathf.PI)
+                phase = Random.Range(0f, 2 * Mathf.PI),
+
+                steepness = globalSteepness
             });
         }
 
@@ -136,16 +158,30 @@ public class OceanWaves : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (previousWaveCount != waveCount)
+        if (previousWaveCount != waveCount || previousIsOneDimension != isOneDimension)
         {
             previousWaveCount = waveCount;
+            previousIsOneDimension = isOneDimension;
             GenerateWaveList();
         }
 
-        if (previousIsOneDimension != isOneDimension)
+        if (!Mathf.Approximately(previousSmoothing, Smoothing) || !Mathf.Approximately(previousGlobalSteepness, globalSteepness) || previousAllowWaveFolding != allowWaveFolding)
         {
-            previousIsOneDimension = isOneDimension;
-            GenerateWaveList();
+            previousSmoothing = Smoothing;
+            previousGlobalSteepness = globalSteepness;
+            previousAllowWaveFolding = allowWaveFolding;
+
+            foreach (var wave in waves)
+            {
+                if (allowWaveFolding)
+                {
+                    wave.steepness = globalSteepness;
+                }
+                else
+                {
+                    wave.steepness = Mathf.Min(globalSteepness, 1f / (wave.k * wave.Amplitude));
+                }
+            }
         }
 
         //Formal Decleration of time:
@@ -175,8 +211,8 @@ public class OceanWaves : MonoBehaviour
 
                 displacementY += wave.Amplitude * Mathf.Sin(wavephase);
 
-                displacementX += wave.direction.x * wave.Amplitude * Mathf.Cos(wavephase);
-                displacementZ += wave.direction.z * wave.Amplitude * Mathf.Cos(wavephase);
+                displacementX += wave.steepness * wave.direction.x * wave.Amplitude * Mathf.Cos(wavephase);
+                displacementZ += wave.steepness * wave.direction.z * wave.Amplitude * Mathf.Cos(wavephase);
             }
 
             //Smooth Lerping:
